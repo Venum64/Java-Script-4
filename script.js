@@ -15,52 +15,37 @@ alert(answer);
 // info end
 
 // random start
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function randomaizer(min = 1, max = 100) {
+    return Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
-function getRandomOperator() {
-    let operators = "+-*/";
-    return operators.charAt(getRandomInt(0, operators.length - 1));
-}
+let amountExamples = +prompt("Сколько примеров хотите решить?");
 
-function generateExample() {
-    let num1 = getRandomInt(1, 20);
-    let num2 = getRandomInt(1, 20);
-    let operator = getRandomOperator();
-    let answer;
+for (let i = 0; i < amountExamples; i++) {
+    let num1 = randomaizer();
+    let num2 = randomaizer();
+    let symbol = randomaizer(1, 4);
+    let example = 0;
 
-    if (operator === '/') {
-        let divisor = getRandomInt(1, 10);
-        let dividend = divisor * getRandomInt(1, 10);
-        return {
-            example: dividend + " / " + divisor,
-            answer: dividend / divisor
-        };
-    }
-
-    if (operator === '+') answer = num1 + num2;
-    if (operator === '-') answer = num1 - num2;
-    if (operator === '*') answer = num1 * num2;
-
-    return {
-        example: num1 + " " + operator + " " + num2,
-        answer: answer
-    };
-}
-
-let count = Number(prompt("Сколько примеров хотите решить?"));
-
-for (let i = 1; i <= count; i++) {
-    let exampleObj = generateExample();
-    let userAnswer = Number(prompt("Пример " + i + ": " + exampleObj.example + " = ?"));
-    if (userAnswer === exampleObj.answer) {
-        alert("Ваш ответ верный - " + userAnswer);
+    if (symbol == 1) {
+        example = num1 + num2;
+        symbol = '+';
+    } else if (symbol == 2) {
+        example = num1 - num2;
+        symbol = '-';
+    } else if (symbol == 3) {
+        example = num1 * num2;
+        symbol = '*';
     } else {
-        alert("Ваш ответ не верный - " + userAnswer + ". Правильный ответ - " + exampleObj.answer + "!");
+        example = num1 / num2;
+        symbol = '/';
     }
-}
 
+    let question = +prompt(num1 + symbol + num2 + ' = ?');
+
+    // Используем тернарный оператор для вывода результата
+    alert(question === example ? "Правильно!" : "Неправильно! Правильный ответ: " + example);
+}
 // random end
 
 // random end
