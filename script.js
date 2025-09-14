@@ -44,7 +44,11 @@ for (let i = 0; i < amountExamples; i++) {
     let question = +prompt(num1 + symbol + num2 + ' = ?');
 
     // Используем тернарный оператор для вывода результата
-    alert(question === example ? "Правильно!" : "Неправильно! Правильный ответ: " + example);
+    let message =
+        example == question
+            ? 'Молодец! Правильный ответ! ' + question
+            : 'Ваш ответ ' + question + ' неверный! ' + ' Правильный ответ ' + example;
+    alert(message);
 }
 // random end
 
